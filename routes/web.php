@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::controller(AdminController::class)->middleware(['auth', 'verified'])->group(function(){
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::post('/admin/logout', 'destroy')->name('admin.logout'); 
+});
 require __DIR__.'/auth.php';

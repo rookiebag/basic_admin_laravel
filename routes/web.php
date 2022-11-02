@@ -20,5 +20,8 @@ Route::get('/', function () {
 Route::controller(AdminController::class)->middleware(['auth', 'verified'])->group(function(){
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/admin/logout', 'destroy')->name('admin.logout'); 
+    Route::get('/admin/profile', 'profile')->name('admin.profile'); 
+    Route::get('/edit/profile', 'editProfile')->name('edit.profile');
+    Route::post('/store/profile', 'updateProfile')->name('update.profile');
 });
 require __DIR__.'/auth.php';

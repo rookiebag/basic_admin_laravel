@@ -52,7 +52,21 @@ class AdminController extends Controller
      */
     public function updateProfile(Request $request)
     {
-        
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email  = $request->email;
+        $user->username  = $request->username;
+
+        if($request->file('profile_image')){
+            $profileImage = $id.'_profile.'.$request->file('profile_image')->extension();
+            $request->file('profile_image')->move(public_path('adminProfiles'), $profileImage);
+            $user->profile_pic  = $profileImage;
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Profile Updated');        
     }
 
 }

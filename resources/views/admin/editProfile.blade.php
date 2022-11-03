@@ -49,8 +49,15 @@
                                 <div class="row mb-3">
                                     <label for="showImage" class="col-sm-2 col-form-label"> </label>
                                     <div class="col-sm-10">
+                                        @if ($editData->profile_pic)
                                         <img id="showImage" class="rounded avatar-lg"
-                                            src="{{ asset('backend/assets/images/small/img-5.jpg') }}" alt="Card image cap">
+                                            src="{{ asset('adminProfiles/'.$editData->profile_pic ) }}" 
+                                            alt="Card image cap">
+                                        @else
+                                            <img id="showImage" class="rounded avatar-lg"
+                                            src="{{ asset('backend/assets/images/small/img-5.jpg') }}" 
+                                            alt="Card image cap">
+                                        @endif
                                     </div>
                                 </div>
                                 <!-- end row -->

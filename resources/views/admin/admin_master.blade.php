@@ -27,6 +27,8 @@
         <!-- App Css-->
         <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+        {{-- Added jquery at top: to facilitate internal pages --}}
+        <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
     </head>
 
     <body data-topbar="dark">
@@ -65,7 +67,7 @@
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
-        <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
+        
         <script src="{{ asset('backend/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('backend/assets/libs/metismenu/metisMenu.min.js') }}"></script>
         <script src="{{ asset('backend/assets/libs/simplebar/simplebar.min.js') }}"></script>

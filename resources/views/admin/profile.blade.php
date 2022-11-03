@@ -5,8 +5,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card"><br><br>
-                        <center>
-                            <img class="rounded-circle avatar-xl" src="{{ asset('backend/assets/images/small/img-5.jpg') }}"
+                        <center>                            
+                            @php($picSrc = 'backend/assets/images/small/img-5.jpg')
+                            @if( $adminData->profile_pic)
+                                @php($picSrc = 'adminProfiles/'.$adminData->profile_pic)
+                            @endif
+                            <img class="rounded-circle avatar-xl" 
+                                src="{{ asset($picSrc) }}"
                                 alt="Card image cap">
                         </center>
 

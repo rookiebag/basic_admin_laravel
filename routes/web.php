@@ -23,5 +23,7 @@ Route::controller(AdminController::class)->middleware(['auth', 'verified'])->gro
     Route::get('/admin/profile', 'profile')->name('admin.profile'); 
     Route::get('/edit/profile', 'editProfile')->name('edit.profile');
     Route::post('/store/profile', 'updateProfile')->name('update.profile');
+    Route::get('/change/password', 'ChangePassword')->name('change.password');
+    Route::post('/update/password', 'UpdatePassword')->name('update.password');
 });
 require __DIR__.'/auth.php';

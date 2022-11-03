@@ -66,7 +66,8 @@ class AdminController extends Controller
 
         $user->save();
 
-        return back()->with('success', 'Profile Updated');        
+        return redirect()->route('admin.profile');
+        // return back()->with('success', 'Profile Updated');
     }
 
 }

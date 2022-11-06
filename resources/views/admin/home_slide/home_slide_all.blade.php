@@ -7,8 +7,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Home Slide Page </h4>
-                            <form method="post" action="{{ route('update.profile') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('home.slide.update', [$homeslide->id]) }}" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Title</label>
                                     <div class="col-sm-10">

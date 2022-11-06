@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\HomeSlide;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
+use Image;
 
 class HomeSliderController extends Controller
 {
@@ -14,12 +15,12 @@ class HomeSliderController extends Controller
 
         // $homeslide = HomeSlide::all();
         $homeslide = HomeSlide::find(1);
-        return view('admin.home_slide.home_slide_all',compact('homeslide'));
+        return view('admin.home_slide.home_slide_all', compact('homeslide'));
     }
 
     public function CreateSlider(Request $request)
     {
-        return view('admin.home_slide.home_slide_create',[]);
+        return view('admin.home_slide.home_slide_create', []);
     }
 
     public function StoreSlider(Request $request)
@@ -32,8 +33,8 @@ class HomeSliderController extends Controller
         ]);
 
         $sliderImage = '';
-        if($request->file('home_slide')){
-            $sliderImage = time().'_slide.'.$request->file('home_slide')->extension();
+        if ($request->file('home_slide')) {
+            $sliderImage = time() . '_slide.' . $request->file('home_slide')->extension();
             $request->file('home_slide')->move(public_path('slides'), $sliderImage);
         }
         HomeSlide::create([
@@ -44,10 +45,36 @@ class HomeSliderController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Slide saved Successfully', 
+            'message' => 'Slide saved Successfully',
             'alert-type' => 'info'
         );
 
-        return redirect()->route('home.slide')->with($notification);        
+        return redirect()->route('home.slide')->with($notification);
+    }
+
+    public function UpdateSlider(Request $request, HomeSlide $slide)
+    {
+        $slideData = [
+            'title' => $request->title,
+            'short_title' => $request->short_title,
+            'video_url' => $request->video_url,
+        ];
+        $msg = 'Home Slide Updated without Image Successfully';
+        if ($request->file('home_slide')) {
+            $image = $request->file('home_slide');
+            $sliderImage = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            $request->file('home_slide')->move(public_path('slides'), $sliderImage);
+            // Image::make($image)->resize(636, 852)->save('slides/636_852/' . $sliderImage);
+            // Image::make($image)->save('slides/' . $sliderImage);
+            $slideData['home_slide'] = $sliderImage;
+            $msg = 'Home Slide Updated with Image Successfully';
+        }
+        $slide->update($slideData);
+        $notification = array(
+            'message' => $msg,
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
 }

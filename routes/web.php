@@ -33,5 +33,7 @@ Route::controller(HomeSliderController::class)->middleware(['auth', 'verified'])
     Route::get('/home/slide', 'HomeSlider')->name('home.slide');
     Route::get('/home/slide/create', 'CreateSlider')->name('home.slide.create');
     Route::post('/home/slide/store', 'StoreSlider')->name('home.slide.store');
+    Route::put('/home/slide/{slide}', 'UpdateSlider')->name('home.slide.update');
 });
+
 require __DIR__.'/auth.php';

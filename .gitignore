@@ -3,6 +3,7 @@
 /public/hot
 /public/storage
 public/adminProfiles/
+public/slides/
 /storage/*.key
 /vendor
 .env

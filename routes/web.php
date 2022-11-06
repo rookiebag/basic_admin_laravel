@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeSliderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,5 +27,11 @@ Route::controller(AdminController::class)->middleware(['auth', 'verified'])->gro
     Route::post('/store/profile', 'updateProfile')->name('update.profile');
     Route::get('/change/password', 'ChangePassword')->name('change.password');
     Route::post('/update/password', 'UpdatePassword')->name('update.password');
+});
+
+Route::controller(HomeSliderController::class)->middleware(['auth', 'verified'])->group(function(){
+    Route::get('/home/slide', 'HomeSlider')->name('home.slide');
+    Route::get('/home/slide/create', 'CreateSlider')->name('home.slide.create');
+    Route::post('/home/slide/store', 'StoreSlider')->name('home.slide.store');
 });
 require __DIR__.'/auth.php';

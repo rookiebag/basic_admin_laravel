@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeSliderController;
@@ -36,4 +37,9 @@ Route::controller(HomeSliderController::class)->middleware(['auth', 'verified'])
     Route::put('/home/slide/{slide}', 'UpdateSlider')->name('home.slide.update');
 });
 
+Route::controller(AboutController::class)->group(function(){
+    Route::get('/about/page', 'AboutPage')->name('about.page');
+    Route::post('/update/about', 'UpdateAbout')->name('update.about');
+    Route::get('/about', 'HomeAbout')->name('home.about');
+});
 require __DIR__.'/auth.php';

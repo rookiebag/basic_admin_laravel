@@ -4,6 +4,7 @@
 /public/storage
 public/adminProfiles/
 public/slides/
+public/upload/
 /storage/*.key
 /vendor
 .env
